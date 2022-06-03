@@ -9,7 +9,7 @@ export async function post() {
   const paymentIntent = await stripe.paymentIntents.create({
     amount: order.total,
     currency: 'usd',
-    payment_method_types: [ 'card_present' ],
+    payment_method_types: ['card_present'],
     capture_method: 'manual'
   })
 

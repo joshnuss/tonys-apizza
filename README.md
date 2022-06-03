@@ -1,12 +1,12 @@
 # Tony's Apizza
 
-Point of sale example for a pizza shop. Using [Stripe Terminal](https://stripe.com/docs/terminal), [SvelteKit](https://kit.svelte.dev) and [Prisma](https://prisma.io).
+Example POS for a pizza shop. Built using [Stripe Terminal](https://stripe.com/docs/terminal), [SvelteKit](https://kit.svelte.dev) and [Prisma](https://prisma.io).
 
 ## Features
 
 - Built with [SvelteKit](https://kit.svelte.dev)
-- Integration with [Stripe Terminal]()
-- ORM uses [Prisma]()
+- Payments with [Stripe Terminal](https://stripe.com/docs/terminal)
+- ORM uses [Prisma](https://prisma.io)
 - Responsive touch keypad using CSS grid
 
 ## Caveats

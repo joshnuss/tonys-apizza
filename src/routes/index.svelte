@@ -39,7 +39,7 @@
 
   async function onFetchConnectionToken() {
     const token = await post('/stripe/connection-token')
-    console.log(`Got new token: ${ token.secret }`)
+    console.log(`Got new token: ${token.secret}`)
     return token.secret
   }
 
@@ -56,16 +56,16 @@
     terminal.setReaderDisplay({
       type: 'cart',
       cart: {
-        line_items: $order.lineItems.map(line => ({
+        line_items: $order.lineItems.map((line) => ({
           description: line.product.name,
           quantity: line.quantity,
           amount: line.subtotal
         })),
         tax: $order.tax,
         total: $order.total,
-        currency: 'usd',
-      },
-    });
+        currency: 'usd'
+      }
+    })
   }
 
   async function handleCancel() {
@@ -103,7 +103,6 @@
   function type(char) {
     buffer += char
   }
-
 </script>
 
 <svelte:head>
@@ -121,27 +120,31 @@
         <tr class="item">
           <td class="quantity">{item.quantity}x</td>
           <td class="name">{item.product.name}</td>
-          <td class="subtotal">{(item.subtotal/100).toLocaleString('en', { style: 'currency', currency: 'USD'})}</td>
+          <td class="subtotal"
+            >{(item.subtotal / 100).toLocaleString('en', {
+              style: 'currency',
+              currency: 'USD'
+            })}</td
+          >
         </tr>
       {/each}
 
       {#if buffer}
         <tr class="item">
           <td class="quantity">{buffer}x</td>
-          <td colspan="2"/>
+          <td colspan="2" />
         </tr>
       {/if}
-
     </table>
 
     <dl class="totals">
       <dd>Tax</dd>
       <dt>
-        {($order.tax/100).toLocaleString('en', { style: 'currency', currency: 'USD'})}
+        {($order.tax / 100).toLocaleString('en', { style: 'currency', currency: 'USD' })}
       </dt>
       <dd>Total</dd>
       <dt>
-        {($order.total/100).toLocaleString('en', { style: 'currency', currency: 'USD'})}
+        {($order.total / 100).toLocaleString('en', { style: 'currency', currency: 'USD' })}
       </dt>
     </dl>
   </div>
@@ -153,45 +156,35 @@
       </button>
     {/each}
 
-    <button on:click|preventDefault={() => type('.')}>
-      .
-    </button>
+    <button on:click|preventDefault={() => type('.')}> . </button>
 
-    <button on:click|preventDefault={() => type('0')} disabled={buffer.length == 0}>
-      0
-    </button>
+    <button on:click|preventDefault={() => type('0')} disabled={buffer.length == 0}> 0 </button>
 
-    <button on:click|preventDefault={() => type('00')} disabled={buffer.length == 0}>
-      00
-    </button>
-
+    <button on:click|preventDefault={() => type('00')} disabled={buffer.length == 0}> 00 </button>
   </div>
 
   <div class="shortcuts">
-    <button on:click|preventDefault={() => handleAdd('slice')}>
-      Slice
-    </button>
-    <button on:click|preventDefault={() => handleAdd('pie')}>
-      Pie
-    </button>
-    <button on:click|preventDefault={() => handleAdd('soda')}>
-      Soda
-    </button>
-    <button on:click|preventDefault={() => handleAdd('water')}>
-      Water
-    </button>
+    <button on:click|preventDefault={() => handleAdd('slice')}> Slice </button>
+    <button on:click|preventDefault={() => handleAdd('pie')}> Pie </button>
+    <button on:click|preventDefault={() => handleAdd('soda')}> Soda </button>
+    <button on:click|preventDefault={() => handleAdd('water')}> Water </button>
   </div>
 
   <div class="actions">
-
-    <button on:click|preventDefault={handleCancel} disabled={$order.lineItems.length == 0 && buffer == ''}>
+    <button
+      on:click|preventDefault={handleCancel}
+      disabled={$order.lineItems.length == 0 && buffer == ''}
+    >
       Void
     </button>
 
-    <button on:click|preventDefault={handlePay} disabled={$order.lineItems.length == 0 || paying} class="pay">
-      { paying ? 'Waiting...' : 'Pay' }
+    <button
+      on:click|preventDefault={handlePay}
+      disabled={$order.lineItems.length == 0 || paying}
+      class="pay"
+    >
+      {paying ? 'Waiting...' : 'Pay'}
     </button>
-
   </div>
 </div>
 
@@ -255,7 +248,8 @@
     width: 100%;
     bottom: 0;
   }
-  .totals dd, .totals dt {
+  .totals dd,
+  .totals dt {
     padding: 0;
     margin: 0;
   }
@@ -310,7 +304,8 @@
     border-radius: 0;
   }
 
-  .shortcuts button, .actions button {
+  .shortcuts button,
+  .actions button {
     background: #ccc;
     border-color: #bbb;
   }
@@ -338,7 +333,8 @@
     button {
       font-size: 1.4rem;
     }
-    .shortcuts button, .actions button {
+    .shortcuts button,
+    .actions button {
       font-size: 1.3rem;
     }
     .receipt {
@@ -353,7 +349,8 @@
     button {
       font-size: 2.2rem;
     }
-    .shortcuts button, .actions button {
+    .shortcuts button,
+    .actions button {
       font-size: 1.8rem;
     }
     .receipt {
@@ -365,7 +362,8 @@
     button {
       font-size: 2.2rem;
     }
-    .shortcuts button, .actions button {
+    .shortcuts button,
+    .actions button {
       font-size: 1.6rem;
     }
     .receipt {

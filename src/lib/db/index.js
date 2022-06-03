@@ -3,7 +3,7 @@ import orders from './orders'
 import lineItems from './lineItems'
 
 export default {
-	products,
-	orders,
-	lineItems,
+  products,
+  orders,
+  lineItems
 }
