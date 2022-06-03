@@ -1,6 +1,6 @@
-# Point-of-Sale Example
+# Tony's Apizza
 
-Example point of sale for a pizza shop.
+Point of sale example for a pizza shop. Using [Stripe Terminal](https://stripe.com/docs/terminal), [SvelteKit](https://kit.svelte.dev) and [Prisma](https://prisma.io).
 
 ## Features
 
