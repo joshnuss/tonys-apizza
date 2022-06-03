@@ -8,7 +8,7 @@
   export let latestOrder = null
 
   let paying = false
-  let buffer = ''
+  let input = ''
 
   onMount(async () => {
     await initTerminal()
@@ -20,15 +20,15 @@
 
   async function handleAdd(e) {
     const sku = e.detail
-    const quantity = buffer ? parseInt(buffer) : 1
+    const quantity = input ? parseInt(input) : 1
 
     await add(sku, quantity)
-    buffer = ''
+    input = ''
   }
 
   async function handleCancel() {
     await cancel()
-    buffer = ''
+    input = ''
   }
 
   async function handlePay() {
@@ -36,12 +36,12 @@
 
     await pay()
     paying = false
-    buffer = ''
+    input = ''
   }
 
   function handleType(e) {
     const chars = e.detail
-    buffer += chars
+    input += chars
   }
 </script>
 
@@ -54,10 +54,10 @@
 </header>
 
 <div class="panel">
-  <Cart {buffer}/>
+  <Cart {input}/>
 
   <Numpad
-    {buffer}
+    {input}
     {paying}
     disabled={paying}
     on:type={handleType}
@@ -75,7 +75,7 @@
     gap: 1rem;
     gap: 0;
     border-radius: 15px;
-    min-width: 500px;
+    min-width: max(50vw, 50vh);
   }
 
 </style>

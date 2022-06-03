@@ -1,7 +1,7 @@
 <script>
   import { order } from '$lib/cart'
 
-  export let buffer
+  export let input
 </script>
 
 <div class="receipt">
@@ -19,9 +19,9 @@
       </tr>
     {/each}
 
-    {#if buffer}
+    {#if input}
       <tr class="item">
-        <td class="quantity">{buffer}x</td>
+        <td class="quantity">{input}x</td>
         <td colspan="2" />
       </tr>
     {/if}
@@ -53,9 +53,9 @@
   }
 
   .items {
-    grid-row: 1 / span 4;
-    margin: 1rem;
-    width: calc(100% - 2rem);
+    grid-row: 1 / 4;
+    margin: 0.5rem;
+    width: calc(100% - 1rem);
     height: min-content;
     border-collapse: collapse;
   }
@@ -80,13 +80,16 @@
   }
 
   .totals {
+    grid-row: 5;
     border-top: solid 1px #ccc;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    padding: 1rem;
+    align-content: baseline;
+    padding: 0.5rem;
     gap: 0.5rem;
     position: absolute;
     width: 100%;
+    height: 100%;
     bottom: 0;
     margin: 0;
   }
@@ -106,10 +109,20 @@
     .receipt {
       font-size: 1rem;
     }
+
+    .items {
+      margin: 0.75rem;
+      width: calc(100% - 1.5rem);
+    }
   }
   @media screen and (min-width: 768px) {
     .receipt {
       font-size: 1.2rem;
+    }
+
+    .items {
+      margin: 1rem;
+      width: calc(100% - 2rem);
     }
   }
 

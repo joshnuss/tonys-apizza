@@ -4,7 +4,7 @@
 
   const dispatch = createEventDispatcher()
 
-  export let buffer
+  export let input
   export let disabled = false
   export let paying = false
 
@@ -35,9 +35,9 @@
 
   <button on:click|preventDefault={() => type('.')} {disabled}> . </button>
 
-  <button on:click|preventDefault={() => type('0')} disabled={disabled || buffer.length == 0}> 0 </button>
+  <button on:click|preventDefault={() => type('0')} disabled={disabled || input.length == 0}> 0 </button>
 
-  <button on:click|preventDefault={() => type('00')} disabled={disabled || buffer.length == 0}> 00 </button>
+  <button on:click|preventDefault={() => type('00')} disabled={disabled || input.length == 0}> 00 </button>
 </div>
 
 <div class="shortcuts">
@@ -50,7 +50,7 @@
 <div class="actions">
   <button
     on:click|preventDefault={cancel}
-    disabled={disabled || ($order.lineItems.length == 0 && buffer == '')}
+    disabled={disabled || ($order.lineItems.length == 0 && input == '')}
   >
     Void
   </button>
