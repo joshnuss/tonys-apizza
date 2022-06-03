@@ -2,6 +2,13 @@
   import { order } from '$lib/cart'
 
   export let input
+
+  function formatCurrency(cents) {
+    return (cents / 100).toLocaleString('en', {
+      style: 'currency',
+      currency: 'USD'
+    })
+  }
 </script>
 
 <div class="receipt">
@@ -10,12 +17,7 @@
       <tr class="item">
         <td class="quantity">{item.quantity}x</td>
         <td class="name">{item.product.name}</td>
-        <td class="subtotal"
-          >{(item.subtotal / 100).toLocaleString('en', {
-            style: 'currency',
-            currency: 'USD'
-          })}</td
-        >
+        <td class="subtotal">{formatCurrency(item.subtotal)}</td>
       </tr>
     {/each}
 
@@ -30,11 +32,11 @@
   <dl class="totals">
     <dd>Tax</dd>
     <dt>
-      {($order.tax / 100).toLocaleString('en', { style: 'currency', currency: 'USD' })}
+      {formatCurrency($order.tax)}
     </dt>
     <dd>Total</dd>
     <dt>
-      {($order.total / 100).toLocaleString('en', { style: 'currency', currency: 'USD' })}
+      {formatCurrency($order.total)}
     </dt>
   </dl>
 </div>
