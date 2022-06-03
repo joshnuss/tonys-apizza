@@ -36,17 +36,30 @@ cp .env.example .env.development
 ```
 
 ```bash
-pnpm db:create db:seed
+sudo -u postgres createdb tonys_apizza_dev
+psql tonys_apizza_dev
+```
+
+```sql
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO <user>
+```
+
+```bash
+pnpm db:seed
 ```
 
 ```bash
 node scripts/create-test-reader.js
 ```
 
-## Usage
+## Development
 
 ```bash
 pnpm dev
+```
+
+```bash
+stripe listen --forward-to localhost:3000/stripe/events
 ```
 
 ## License
