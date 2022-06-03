@@ -1,14 +1,14 @@
 import { writable } from 'svelte/store'
 import { post } from './http'
 
-export let order = writable({
+export let cart = writable({
   lineItems: [],
   tax: 0,
   total: 0
 })
 
 export function reset() {
-  order.set({
+  cart.set({
     lineItems: [],
     tax: 0,
     total: 0
@@ -16,24 +16,24 @@ export function reset() {
 }
 
 export async function add(sku, quantity = 1) {
-  const updated = await post('/order/items', {
+  const updated = await post('/cart/items', {
     sku,
     quantity
   })
 
-  order.set(updated)
+  cart.set(updated)
 }
 
 export async function createPaymentIntent() {
-  return await post('/order/create-payment-intent')
+  return await post('/cart/create-payment-intent')
 }
 
 export async function capture() {
-  await post('/order/capture')
+  await post('/cart/capture')
   reset()
 }
 
 export async function cancel() {
-  await post('/order/cancel')
+  await post('/cart/cancel')
   reset()
 }

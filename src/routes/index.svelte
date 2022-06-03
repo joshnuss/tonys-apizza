@@ -1,11 +1,11 @@
 <script>
   import { onMount } from 'svelte'
-  import { order, add, cancel } from '$lib/cart'
+  import { cart, add, cancel } from '$lib/cart'
   import { initTerminal, pay } from '$lib/terminal'
   import Cart from '$lib/components/Cart.svelte'
   import Numpad from '$lib/components/Numpad.svelte'
 
-  export let latestOrder = null
+  export let openOrder = null
 
   let paying = false
   let input = ''
@@ -13,8 +13,8 @@
   onMount(async () => {
     await initTerminal()
 
-    if (latestOrder) {
-      $order = latestOrder
+    if (openOrder) {
+      $cart = openOrder
     }
   })
 

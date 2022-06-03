@@ -1,5 +1,5 @@
 <script>
-  import { order } from '$lib/cart'
+  import { cart } from '$lib/cart'
   import { createEventDispatcher } from 'svelte'
 
   const dispatch = createEventDispatcher()
@@ -50,14 +50,14 @@
 <div class="actions">
   <button
     on:click|preventDefault={cancel}
-    disabled={disabled || ($order.lineItems.length == 0 && input == '')}
+    disabled={disabled || ($cart.lineItems.length == 0 && input == '')}
   >
     Void
   </button>
 
   <button
     on:click|preventDefault={pay}
-    disabled={$order.lineItems.length == 0 || disabled || paying}
+    disabled={$cart.lineItems.length == 0 || disabled || paying}
     class="pay"
   >
     {paying ? 'Waiting...' : 'Pay'}

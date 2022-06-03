@@ -1,5 +1,5 @@
 <script>
-  import { order } from '$lib/cart'
+  import { cart } from '$lib/cart'
 
   export let input
 
@@ -13,7 +13,7 @@
 
 <div class="receipt">
   <table class="items">
-    {#each $order.lineItems as item}
+    {#each $cart.lineItems as item}
       <tr class="item">
         <td class="quantity">{item.quantity}x</td>
         <td class="name">{item.product.name}</td>
@@ -32,11 +32,11 @@
   <dl class="totals">
     <dd>Tax</dd>
     <dt>
-      {formatCurrency($order.tax)}
+      {formatCurrency($cart.tax)}
     </dt>
     <dd>Total</dd>
     <dt>
-      {formatCurrency($order.total)}
+      {formatCurrency($cart.total)}
     </dt>
   </dl>
 </div>
