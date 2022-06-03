@@ -12,7 +12,8 @@
     "prepare": "svelte-kit sync",
     "lint": "prettier --ignore-path .prettierignore --check --plugin-search-dir=. . && eslint --ignore-path .prettierignore .",
     "format": "prettier --ignore-path .prettierignore --write --plugin-search-dir=. .",
-    "db:seed": "dotenv -c development prisma db seed"
+    "db:seed": "dotenv -c development prisma db seed",
+    "db:push": "dotenv -c development prisma db push"
   },
   "devDependencies": {
     "@stripe/terminal-js": "^0.10.0",
