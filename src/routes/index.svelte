@@ -247,6 +247,7 @@
     position: absolute;
     width: 100%;
     bottom: 0;
+    margin: 0;
   }
   .totals dd,
   .totals dt {
@@ -331,36 +332,36 @@
 
   @media screen and (min-width: 480px) {
     button {
-      font-size: 1.4rem;
+      font-size: 1.2rem;
     }
     .shortcuts button,
     .actions button {
       font-size: 1.3rem;
     }
     .receipt {
-      font-size: 1.2rem;
+      font-size: 1rem;
     }
   }
   @media screen and (min-width: 768px) {
     .panel {
       aspect-ratio: 7 / 5;
-      max-width: max(90vw, 90vh);
+      max-width: max(95vw, 95vh);
     }
     button {
-      font-size: 2.2rem;
+      font-size: 1.4rem;
     }
     .shortcuts button,
     .actions button {
       font-size: 1.8rem;
     }
     .receipt {
-      font-size: 1.4rem;
+      font-size: 1.2rem;
     }
   }
 
   @media screen and (min-width: 1024px) {
     button {
-      font-size: 2.2rem;
+      font-size: 1.6rem;
     }
     .shortcuts button,
     .actions button {
