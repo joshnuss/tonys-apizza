@@ -15,6 +15,7 @@ model Product {
   sku String @unique
   name String
   price Int
+  taxable Boolean @default(false)
   lineItems LineItem[]
 }
 

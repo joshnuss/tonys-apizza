@@ -17,7 +17,8 @@ await db.product.createMany({
     {
       sku: 'soda',
       name: 'Soda',
-      price: 199
+      price: 199,
+      taxable: true
     },
     {
       sku: 'water',
