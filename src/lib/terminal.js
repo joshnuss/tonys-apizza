@@ -46,12 +46,14 @@ export async function pay() {
 
   if (result.error) {
     console.error(result.error)
+    return
   }
 
   result = await terminal.processPayment(result.paymentIntent)
 
   if (result.error) {
     console.error(result.error)
+    return
   }
 
   await capture()
