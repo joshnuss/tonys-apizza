@@ -144,10 +144,6 @@
     }
   }
   @media screen and (min-width: 768px) {
-    .panel {
-      aspect-ratio: 7 / 5;
-      min-width: max(50vw, 50vh);
-    }
     button {
       font-size: 1.4rem;
     }
