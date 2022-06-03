@@ -2,6 +2,10 @@
 
 Example POS for a pizza shop. Built using [Stripe Terminal](https://stripe.com/docs/terminal), [SvelteKit](https://kit.svelte.dev) and [Prisma](https://prisma.io).
 
+## Screenshot
+
+![screenshot](/screenshot.jpg)
+
 ## Features
 
 - Built with [SvelteKit](https://kit.svelte.dev)
