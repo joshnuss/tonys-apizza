@@ -25,7 +25,7 @@ export async function add(sku, quantity = 1) {
 }
 
 export async function createPaymentIntent() {
-  return await post('/stripe/payment-intents')
+  return await post('/order/create-payment-intent')
 }
 
 export async function capture() {

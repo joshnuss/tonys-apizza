@@ -1,71 +1,26 @@
 <script>
   import { onMount } from 'svelte'
-  import { order, add, createPaymentIntent, cancel, capture } from '$lib/order'
-  import { loadStripeTerminal } from '@stripe/terminal-js'
-  import { post } from '$lib/http'
+  import { order, add, cancel } from '$lib/cart'
+  import { initTerminal, pay } from '$lib/terminal'
 
   export let latestOrder = null
 
-  let terminal = null
   let paying = false
   let buffer = ''
 
   onMount(async () => {
-    const StripeTerminal = await loadStripeTerminal()
-
-    terminal = StripeTerminal.create({
-      onFetchConnectionToken,
-      onUnexpectedReaderDisconnect,
-      onConnectionStatusChange({ status }) {
-        console.log(`connection status changed ${status}`)
-      },
-      onPaymentStatusChange({ status }) {
-        console.log(`payment status changed ${status}`)
-      }
-    })
-
-    console.log(terminal.getConnectionStatus())
-
-    const { discoveredReaders } = await terminal.discoverReaders({ simulated: true })
-    console.log(discoveredReaders)
-
-    terminal.connectReader(discoveredReaders[0])
-    console.log(terminal.getConnectionStatus())
+    await initTerminal()
 
     if (latestOrder) {
       $order = latestOrder
     }
   })
 
-  async function onFetchConnectionToken() {
-    const token = await post('/stripe/connection-token')
-    console.log(`Got new token: ${token.secret}`)
-    return token.secret
-  }
-
-  function onUnexpectedReaderDisconnect() {
-    console.error('reader disconnected')
-  }
-
   async function handleAdd(sku) {
     const quantity = buffer ? parseInt(buffer) : 1
 
     await add(sku, quantity)
     buffer = ''
-
-    terminal.setReaderDisplay({
-      type: 'cart',
-      cart: {
-        line_items: $order.lineItems.map((line) => ({
-          description: line.product.name,
-          quantity: line.quantity,
-          amount: line.subtotal
-        })),
-        tax: $order.tax,
-        total: $order.total,
-        currency: 'usd'
-      }
-    })
   }
 
   async function handleCancel() {
@@ -76,26 +31,7 @@
   async function handlePay() {
     paying = true
 
-    const paymentIntent = await createPaymentIntent()
-    console.log(paymentIntent)
-    let result = await terminal.collectPaymentMethod(paymentIntent.client_secret)
-
-    if (result.error) {
-      paying = false
-      console.error(result.error)
-    }
-
-    //result = await terminal.processPayment(result.paymentIntent)
-
-    console.log(result)
-
-    if (result.error) {
-      paying = false
-      console.error(result.error)
-    }
-
-    await capture()
-
+    await pay()
     paying = false
     buffer = ''
   }
@@ -345,7 +281,7 @@
   @media screen and (min-width: 768px) {
     .panel {
       aspect-ratio: 7 / 5;
-      max-width: max(95vw, 95vh);
+      min-width: max(50vw, 50vh);
     }
     button {
       font-size: 1.4rem;

@@ -13,6 +13,8 @@ export async function post() {
     capture_method: 'manual'
   })
 
+  await db.orders.mark(order.id, 'PROCESSING_PAYMENT', { paymentIntentId: paymentIntent.id })
+
   return {
     body: paymentIntent
   }
