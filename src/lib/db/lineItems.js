@@ -1,12 +1,11 @@
 import client from './client.js'
 import orders from './orders.js'
+import products from './products.js'
 
 export default {
   async upsert({ sku, quantity }) {
     const { id: orderId } = await orders.findOrCreate()
-    const { id: productId, price } = await client.product.findUnique({
-      where: { sku }
-    })
+    const { id: productId, price } = await products.findBy({ sku })
 
     await client.$transaction([
       upsertItem({ orderId, productId, quantity, price }),
