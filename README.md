@@ -91,6 +91,12 @@ Forward all Stripe events to the local webhook handler:
 stripe listen --forward-to localhost:3000/stripe/events
 ```
 
+If you'd like to inspect data, open Prisma Studio and visit http://localhost:5555
+
+```bash
+pnpm db:studio
+```
+
 ## Caveats
 
 In the real world, you might want to add a few more things:
