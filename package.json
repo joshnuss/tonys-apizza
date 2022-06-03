@@ -1,16 +1,21 @@
 {
 	"name": "tonys-apizza",
 	"version": "0.0.1",
+	"prisma": {
+		"seed": "node prisma/seed.js"
+	},
 	"scripts": {
-		"dev": "svelte-kit dev",
+		"dev": "dotenv -c development svelte-kit dev",
 		"build": "svelte-kit build",
 		"package": "svelte-kit package",
 		"preview": "svelte-kit preview",
 		"prepare": "svelte-kit sync",
 		"lint": "prettier --check --plugin-search-dir=. . && eslint .",
-		"format": "prettier --write --plugin-search-dir=. ."
+		"format": "prettier --write --plugin-search-dir=. .",
+		"db:seed": "dotenv -c development prisma db seed"
 	},
 	"devDependencies": {
+		"@stripe/terminal-js": "^0.10.0",
 		"@sveltejs/adapter-auto": "next",
 		"@sveltejs/kit": "next",
 		"eslint": "^8.12.0",
@@ -20,5 +25,11 @@
 		"prettier-plugin-svelte": "^2.5.0",
 		"svelte": "^3.44.0"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"@prisma/client": "^3.14.0",
+		"dotenv-cli": "^5.1.0",
+		"prisma": "^3.14.0",
+		"stripe": "^9.5.0"
+	}
 }
