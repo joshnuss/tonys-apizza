@@ -8,41 +8,43 @@ export default {
       where: { sku }
     })
 
-    await client.lineItem.upsert({
-      where: {
-        orderId_productId: {
+    await client.$transaction([
+      client.lineItem.upsert({
+        where: {
+          orderId_productId: {
+            orderId,
+            productId
+          }
+        },
+        create: {
           orderId,
-          productId
-        }
-      },
-      create: {
-        orderId,
-        productId,
-        quantity,
-        price,
-        subtotal: price * quantity
-      },
-      update: {
-        quantity: {
-          increment: quantity
+          productId,
+          quantity,
+          price,
+          subtotal: price * quantity
         },
-        subtotal: {
-          increment: price * quantity
+        update: {
+          quantity: {
+            increment: quantity
+          },
+          subtotal: {
+            increment: price * quantity
+          }
         }
-      }
-    })
+      }),
 
-    await client.order.update({
-      where: { id: orderId },
-      data: {
-        subtotal: {
-          increment: price * quantity
-        },
-        total: {
-          increment: price * quantity
+      client.order.update({
+        where: { id: orderId },
+        data: {
+          subtotal: {
+            increment: price * quantity
+          },
+          total: {
+            increment: price * quantity
+          }
         }
-      }
-    })
+      })
+    ])
 
     return orders.findBy({ id: orderId })
   }
