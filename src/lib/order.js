@@ -15,26 +15,25 @@ export function reset() {
   })
 }
 
+export async function add(sku, quantity = 1) {
+  const updated = await post('/order/items', {
+    sku,
+    quantity
+  })
+
+  order.set(updated)
+}
+
+export async function createPaymentIntent() {
+  return await post('/stripe/payment-intents')
+}
+
 export async function capture() {
   await post('/order/capture')
   reset()
 }
 
 export async function cancel() {
-  await post('/order/void')
-
+  await post('/order/cancel')
   reset()
-}
-
-export async function add(sku, quantity) {
-  order.set(
-    await post('/order', {
-      sku,
-      quantity
-    })
-  )
-}
-
-export async function createPaymentIntent() {
-  return await post('/stripe/payment-intents')
 }
