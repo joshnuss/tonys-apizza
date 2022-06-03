@@ -116,6 +116,11 @@
       margin: 0.75rem;
       width: calc(100% - 1.5rem);
     }
+
+    .totals {
+      padding: 0.75rem;
+      gap: 0.5rem;
+    }
   }
   @media screen and (min-width: 768px) {
     .receipt {
@@ -125,6 +130,10 @@
     .items {
       margin: 1rem;
       width: calc(100% - 2rem);
+    }
+
+    .totals {
+      padding: 1rem;
     }
   }
 
