@@ -9,43 +9,50 @@ export default {
     })
 
     await client.$transaction([
-      client.lineItem.upsert({
-        where: {
-          orderId_productId: {
-            orderId,
-            productId
-          }
-        },
-        create: {
-          orderId,
-          productId,
-          quantity,
-          price,
-          subtotal: price * quantity
-        },
-        update: {
-          quantity: {
-            increment: quantity
-          },
-          subtotal: {
-            increment: price * quantity
-          }
-        }
-      }),
-
-      client.order.update({
-        where: { id: orderId },
-        data: {
-          subtotal: {
-            increment: price * quantity
-          },
-          total: {
-            increment: price * quantity
-          }
-        }
-      })
+      upsertLineItem({ orderId, productId, quantity, price }),
+      incrementTotals({ orderId, quantity, price })
     ])
 
     return orders.findBy({ id: orderId })
   }
+}
+
+function upsertLineItem({ orderId, productId, quantity, price }) {
+  return client.lineItem.upsert({
+    where: {
+      orderId_productId: {
+        orderId,
+        productId
+      }
+    },
+    create: {
+      orderId,
+      productId,
+      quantity,
+      price,
+      subtotal: price * quantity
+    },
+    update: {
+      quantity: {
+        increment: quantity
+      },
+      subtotal: {
+        increment: price * quantity
+      }
+    }
+  })
+}
+
+function incrementTotals({ orderId, price, quantity }) {
+  return client.order.update({
+    where: { id: orderId },
+    data: {
+      subtotal: {
+        increment: price * quantity
+      },
+      total: {
+        increment: price * quantity
+      }
+    }
+  })
 }
