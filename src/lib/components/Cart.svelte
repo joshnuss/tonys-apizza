@@ -12,9 +12,9 @@
 </script>
 
 <div class="receipt">
-  <table class="items">
+  <table>
     {#each $cart.lineItems as item}
-      <tr class="item">
+      <tr>
         <td class="quantity">{item.quantity}x</td>
         <td class="name">{item.product.name}</td>
         <td class="subtotal">{formatCurrency(item.subtotal)}</td>
@@ -22,7 +22,7 @@
     {/each}
 
     {#if input}
-      <tr class="item">
+      <tr>
         <td class="quantity">{input}x</td>
         <td colspan="2" />
       </tr>
@@ -54,7 +54,7 @@
     grid-template-rows: repeat(5, 1fr);
   }
 
-  .items {
+  table {
     grid-row: 1 / 4;
     margin: 0.5rem;
     width: calc(100% - 1rem);
@@ -62,21 +62,21 @@
     border-collapse: collapse;
   }
 
-  .items tr:nth-child(even) {
+  table tr:nth-child(even) {
     background: #f6f6f6;
   }
 
-  .item td {
+  td {
     padding: 0.5rem;
   }
 
-  .item .quantity {
+  .quantity {
     width: 1ch;
     text-align: right;
     font-weight: bold;
   }
 
-  .item .subtotal {
+  .subtotal {
     grid-column: 7 / 9;
     text-align: right;
   }
@@ -112,7 +112,7 @@
       font-size: 1rem;
     }
 
-    .items {
+    table {
       margin: 0.75rem;
       width: calc(100% - 1.5rem);
     }
@@ -127,7 +127,7 @@
       font-size: 1.2rem;
     }
 
-    .items {
+    table {
       margin: 1rem;
       width: calc(100% - 2rem);
     }
