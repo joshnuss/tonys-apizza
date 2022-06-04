@@ -12,6 +12,7 @@ Example POS for a pizza shop. Built using [Stripe Terminal](https://stripe.com/t
 - Responsive keypad using CSS grid.
 - Quick add buttons for purchasing common products.
 - Basic tax computation for taxable products.
+- Order and product data using postgres.
 
 ## Setup
 
@@ -47,9 +48,9 @@ pnpm db:seed
 
 ## Create a simulated reader
 
-To test card payments in dev mode, physical hardware isn't needed, Stripe provides simulated readers.
+To test card payments in dev mode, Stripe provides simulated readers.
 
-To create a simulated reader, first create the location:
+To create a simulated reader, first create a location. This tells stripe where the terminal will be used:
 
 ```bash
 > stripe terminal locations create --display-name=store1 \
@@ -75,7 +76,7 @@ Then, create a simulated reader at that location:
 }
 ```
 
-Copy the ID's for the location and reader (they start with `tml_` & `tmr_`) and paste them into the `.env.development` under the keys `STRIPE_LOCATION` & `STRIPE_TERMINAL`.
+Copy the ID's for the location and reader (they start with `tml_` & `tmr_`) and paste them into the `.env.development` under the keys `STRIPE_LOCATION_ID` & `STRIPE_TERMINAL_ID`.
 
 ## Development
 
@@ -102,12 +103,12 @@ pnpm db:studio
 In the real world, you might want to add a few more things:
 
 - Authentication of cashiers
-- Support multiple readers and stations
+- Support for multiple readers and stations
 - Support for tipping
 - Support for cash and cash drawers
 - Receipt printing and integration with thermal printer
-- Barcode scanner
-- Ability to refund
+- A barcode scanner
+- Ability to issue a refund
 
 ## License
 
