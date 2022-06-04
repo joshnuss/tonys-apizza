@@ -7,7 +7,6 @@
 
   export let input
   export let disabled = false
-  export let paying = false
 
   function type(chars) {
     dispatch('type', chars)
@@ -58,7 +57,7 @@
 
   <button
     on:click|preventDefault={pay}
-    disabled={$cart.lineItems.length == 0 || disabled || paying}
+    disabled={$cart.lineItems.length == 0 || disabled}
     class="pay"
   >
     {#if $paymentStatus == 'waiting_for_input'}

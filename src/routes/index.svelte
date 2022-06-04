@@ -1,13 +1,12 @@
 <script>
   import { onMount } from 'svelte'
   import { cart, add, cancel } from '$lib/cart'
-  import { initTerminal, pay } from '$lib/terminal'
+  import { initTerminal, pay, paymentStatus } from '$lib/terminal'
   import Cart from '$lib/components/Cart.svelte'
   import Numpad from '$lib/components/Numpad.svelte'
 
   export let openOrder = null
 
-  let paying = false
   let input = ''
 
   onMount(async () => {
@@ -32,10 +31,7 @@
   }
 
   async function handlePay() {
-    paying = true
-
     await pay()
-    paying = false
     input = ''
   }
 
@@ -49,17 +45,14 @@
   <title>Tony's Apizza</title>
 </svelte:head>
 
-<header>
-  <h1>Tony's Apizza</h1>
-</header>
+<h1>Tony's Apizza</h1>
 
 <div class="panel">
   <Cart {input}/>
 
   <Numpad
     {input}
-    {paying}
-    disabled={paying}
+    disabled={$paymentStatus != 'ready'}
     on:type={handleType}
     on:add={handleAdd}
     on:pay={handlePay}
