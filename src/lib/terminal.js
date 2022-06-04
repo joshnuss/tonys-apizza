@@ -5,8 +5,8 @@ import { post } from '$lib/http'
 
 let terminal = null
 
-export let connectionStatus = writable('loading')
-export let paymentStatus = writable('loading')
+export const connectionStatus = writable('loading')
+export const paymentStatus = writable('loading')
 
 export async function initTerminal() {
   const StripeTerminal = await loadStripeTerminal()
