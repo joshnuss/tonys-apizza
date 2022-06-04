@@ -5,6 +5,9 @@ import { post } from '$lib/http'
 
 let terminal = null
 
+export let connectionStatus = writable('loading')
+export let paymentStatus = writable('loading')
+
 export async function initTerminal() {
   const StripeTerminal = await loadStripeTerminal()
 
@@ -12,10 +15,10 @@ export async function initTerminal() {
     onFetchConnectionToken,
     onUnexpectedReaderDisconnect,
     onConnectionStatusChange({ status }) {
-      console.log(`connection status changed ${status}`)
+      connectionStatus.set(status)
     },
     onPaymentStatusChange({ status }) {
-      console.log(`payment status changed ${status}`)
+      paymentStatus.set(status)
     }
   })
 
