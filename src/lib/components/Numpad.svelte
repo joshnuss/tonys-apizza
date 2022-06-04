@@ -1,5 +1,6 @@
 <script>
   import { cart } from '$lib/cart'
+  import { paymentStatus } from '$lib/terminal'
   import { createEventDispatcher } from 'svelte'
 
   const dispatch = createEventDispatcher()
@@ -60,7 +61,13 @@
     disabled={$cart.lineItems.length == 0 || disabled || paying}
     class="pay"
   >
-    {paying ? 'Waiting...' : 'Pay'}
+    {#if $paymentStatus == 'waiting_for_input'}
+      Waiting...
+    {:else if $paymentStatus == 'processing'}
+      Processing...
+    {:else}
+      Pay
+    {/if}
   </button>
 </div>
 
