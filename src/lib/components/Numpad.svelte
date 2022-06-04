@@ -40,7 +40,7 @@
   <button on:click|preventDefault={() => type('00')} disabled={disabled || input.length == 0}> 00 </button>
 </div>
 
-<div class="shortcuts">
+<div class="quick-add">
   <button on:click|preventDefault={() => add('slice')} {disabled}> Slice </button>
   <button on:click|preventDefault={() => add('pie')} {disabled}> Pie </button>
   <button on:click|preventDefault={() => add('soda')} {disabled}> Soda </button>
@@ -76,7 +76,7 @@
     gap: 0;
   }
 
-  .shortcuts {
+  .quick-add {
     grid-column: 7;
     grid-row: 1 / span 4;
 
@@ -109,7 +109,11 @@
     border-radius: 0;
   }
 
-  .shortcuts button,
+  button:hover {
+    background: #2223;
+  }
+
+  .quick-add button,
   .actions button {
     background: #ccc;
     border-color: #bbb;
@@ -138,7 +142,7 @@
     button {
       font-size: 1.2rem;
     }
-    .shortcuts button,
+    .quick-add button,
     .actions button {
       font-size: 1.3rem;
     }
@@ -147,7 +151,7 @@
     button {
       font-size: 1.4rem;
     }
-    .shortcuts button,
+    .quick-add button,
     .actions button {
       font-size: 1.8rem;
     }
@@ -157,7 +161,7 @@
     button {
       font-size: 1.6rem;
     }
-    .shortcuts button,
+    .quick-add button,
     .actions button {
       font-size: 1.6rem;
     }
