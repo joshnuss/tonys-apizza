@@ -26,6 +26,7 @@
 </script>
 
 <div class="numpad">
+  <!-- digits -->
   {#each Array(9) as _, n}
     {@const num = (n + 1).toString()}
     <button on:click|preventDefault={() => type(num)} {disabled}>
@@ -33,10 +34,9 @@
     </button>
   {/each}
 
+  <!-- bottom row -->
   <button on:click|preventDefault={() => type('.')} {disabled}> . </button>
-
   <button on:click|preventDefault={() => type('0')} disabled={disabled || input.length == 0}> 0 </button>
-
   <button on:click|preventDefault={() => type('00')} disabled={disabled || input.length == 0}> 00 </button>
 </div>
 
