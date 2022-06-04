@@ -30,7 +30,7 @@ cp .env.example .env.development
 Create the Postgres database:
 
 ```bash
-sudo -u postgres createdb tonys_apizza_dev
+pnpm db:create
 ```
 
 Set up the database schema:

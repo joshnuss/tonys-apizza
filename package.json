@@ -12,6 +12,7 @@
     "prepare": "svelte-kit sync",
     "lint": "prettier --ignore-path .prettierignore --check --plugin-search-dir=. . && eslint --ignore-path .prettierignore .",
     "format": "prettier --ignore-path .prettierignore --write --plugin-search-dir=. .",
+    "db:create": "createdb tonys_apizza_dev",
     "db:seed": "dotenv -c development prisma db seed",
     "db:push": "dotenv -c development prisma db push",
     "db:studio": "dotenv -c development prisma studio"
