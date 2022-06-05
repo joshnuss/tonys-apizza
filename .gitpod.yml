@@ -28,8 +28,8 @@ tasks:
         gp env | grep --quiet STRIPE_PRIVATE_KEY
         if [ $? -eq 1 ]
         then
-          printf "${RED}Missing environment variables for Stripe.${NC}\n\n"
-          printf "To configure them:\n\n1. run inside gitpod terminal: ${BOLD}gp env -e STRIPE_PRIVATE_KEY=your_test_stripe_key${NC}\n2. stop and re-start your workspace\n"
+          printf "${RED}Missing ${BOLD}STRIPE_PRIVATE_KEY${RED} environment variable.${NC}\n\n"
+          printf "To configure them:\n\n1. Copy your test key from the Stripe dashboard. https://dashboard.stripe.com/test/apikeys\n2. Run inside gitpod's vscode terminal: ${BOLD}gp env -e STRIPE_PRIVATE_KEY=your_test_stripe_key${NC}\n3. Stop and re-start your workspace\n"
         else
           export HMR_HOST=`gp url 3000`
           pnpm dev
@@ -37,6 +37,7 @@ tasks:
       )
     env:
       DATABASE_URL: postgresql://gitpod@localhost/tonys_apizza_dev
+
   - name: Prisma Studio
     command: npx prisma studio
     env:
