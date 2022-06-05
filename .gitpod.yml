@@ -15,16 +15,15 @@ tasks:
   - init: |
       npm i -g pnpm
       pnpm install
+      pnpm db:create
       pnpm db:push
-    command: |
+      pnpm db:seed
+  - command: |
       export HMR_HOST=`gp url 3000`
       pnpm dev
     env:
       DATABASE_URL: postgresql://gitpod@localhost/tonys_apizza_dev
-  - init: |
-      npm i -g pnpm
-      pnpm install
-    command: npx prisma studio
+  - command: npx prisma studio
     env:
       DATABASE_URL: postgresql://gitpod@localhost/tonys_apizza_dev
 github:
