@@ -2,7 +2,7 @@ import client from './client.js'
 import orders from './orders.js'
 import products from './products.js'
 
-const TAX_RATE = parseFloat(process.env.TAX_RATE)
+const TAX_RATE = parseFloat(process.env.TAX_RATE || '0')
 
 export default {
   async upsert({ sku, quantity }) {
