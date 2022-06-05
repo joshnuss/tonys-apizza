@@ -19,8 +19,21 @@ tasks:
       pnpm db:push
       pnpm db:seed
     command: |
-      export HMR_HOST=`gp url 3000`
-      pnpm dev
+      (
+        RED='\033[0;31m'
+        BOLD='\033[1;30m'
+        NC='\033[0m' # No Color
+
+        gp env | grep --quiet STRIPE_PRIVATE_KEY
+        if [ $? -eq 1 ]
+        then
+          printf "${RED}Missing environment variables for Stripe.${NC}\n\n"
+          printf "To configure them:\n\n1. run inside gitpod terminal: ${BOLD}gp env -e STRIPE_PRIVATE_KEY=your_test_stripe_key${NC}\n2. stop and re-start your workspace\n"
+        else
+          export HMR_HOST=`gp url 3000`
+          pnpm dev
+        fi
+      )
     env:
       DATABASE_URL: postgresql://gitpod@localhost/tonys_apizza_dev
   - command: npx prisma studio
