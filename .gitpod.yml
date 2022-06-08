@@ -40,7 +40,10 @@ tasks:
       DATABASE_URL: postgresql://gitpod@localhost/tonys_apizza_dev
 
   - name: Prisma Studio
-    command: pnpm db:studio
+    command: |
+      which npm
+      which pnpm
+      pnpm db:studio
     env:
       DATABASE_URL: postgresql://gitpod@localhost/tonys_apizza_dev
 github:
