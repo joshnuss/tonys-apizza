@@ -4,7 +4,7 @@ Example POS for a pizza shop. Built using [Stripe Terminal](https://stripe.com/t
 
 ## Try it out
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/joshnuss/tonys-apizza/tree/gitpod)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/joshnuss/tonys-apizza)
 
 ## Screenshot
 

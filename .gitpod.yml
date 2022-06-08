@@ -43,8 +43,7 @@ tasks:
     init: |
       npm install --global pnpm
       pnpm install
-    command: |
-      pnpm db:studio
+    command: pnpm db:studio
     env:
       DATABASE_URL: postgresql://gitpod@localhost/tonys_apizza_dev
 github:
