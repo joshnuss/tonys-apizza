@@ -54,7 +54,7 @@ pnpm db:seed
 
 To test card payments in dev mode, Stripe provides simulated readers.
 
-To create a simulated reader, first create a location. This tells stripe where the terminal will be used:
+To create a simulated reader, first create a location. This tells Stripe where the terminal will be used:
 
 ```bash
 > stripe terminal locations create --display-name=store1 \
@@ -79,8 +79,6 @@ Then, create a simulated reader at that location:
     ...
 }
 ```
-
-Copy the ID's for the location and reader (they start with `tml_` & `tmr_`) and paste them into the `.env.development` under the keys `STRIPE_LOCATION_ID` & `STRIPE_TERMINAL_ID`.
 
 ## Development
 
