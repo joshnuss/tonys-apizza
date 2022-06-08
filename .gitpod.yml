@@ -13,9 +13,10 @@ ports:
 # List the start up tasks. You can start them in parallel in multiple terminals. See https://www.gitpod.io/docs/config-start-tasks
 tasks:
   - name: SvelteKit
-    init: |
+    before: |
       npm install --global pnpm
       pnpm install
+    init: |
       pnpm db:create
       pnpm db:push
       pnpm db:seed
