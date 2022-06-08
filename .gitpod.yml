@@ -1,0 +1,71 @@
+# Copied from https://github.com/mikenikles/sveltekit-prisma
+# Learn more about this Gitpod configuration file in the documentation at https://www.gitpod.io/docs/configuration
+image: gitpod/workspace-postgres
+
+ports:
+  - port: 3000
+    onOpen: open-preview
+  - port: 5432
+    onOpen: ignore
+  - port: 5555
+    onOpen: open-browser
+
+# List the start up tasks. You can start them in parallel in multiple terminals. See https://www.gitpod.io/docs/config-start-tasks
+tasks:
+  - name: SvelteKit
+    init: |
+      npm install --global pnpm
+      pnpm install
+      pnpm db:create
+      pnpm db:push
+      pnpm db:seed
+    command: |
+      (
+        RED='\033[0;31m'
+        BOLD='\033[1;30m'
+        RED_BOLD='\033[1;31m'
+        NC='\033[0m' # No Color
+
+        gp env | grep --quiet STRIPE_PRIVATE_KEY
+        if [ $? -eq 1 ]
+        then
+          printf "${RED}Missing ${RED_BOLD}STRIPE_PRIVATE_KEY${RED} environment variable.${NC}\n\n"
+          printf "To configure it:\n\n  1. Copy your test key from the Stripe dashboard. See: https://dashboard.stripe.com/test/apikeys\n  2. Inside this terminal, run: ${BOLD}gp env -e STRIPE_PRIVATE_KEY=your_test_stripe_key${NC}\n  3. Stop and re-start your workspace\n"
+        else
+          export HMR_HOST=`gp url 3000`
+          pnpm dev
+        fi
+      )
+    env:
+      DATABASE_URL: postgresql://gitpod@localhost/tonys_apizza_dev
+
+  - name: Prisma Studio
+    init: |
+      npm install --global pnpm
+      pnpm install
+    command: pnpm db:studio
+    env:
+      DATABASE_URL: postgresql://gitpod@localhost/tonys_apizza_dev
+github:
+  prebuilds:
+    # enable for the master/default branch (defaults to true)
+    master: true
+    # enable for all branches in this repo (defaults to false)
+    branches: true
+    # enable for pull requests coming from this repo (defaults to true)
+    pullRequests: true
+    # enable for pull requests coming from forks (defaults to false)
+    pullRequestsFromForks: true
+    # add a check to pull requests (defaults to true)
+    addCheck: true
+    # add a "Review in Gitpod" button as a comment to pull requests (defaults to false)
+    addComment: false
+    # add a "Review in Gitpod" button to the pull request's description (defaults to false)
+    addBadge: true
+    # add a label once the prebuild is ready to pull requests (defaults to false)
+    addLabel: false
+
+vscode:
+  extensions:
+    - svelte.svelte-vscode
+    - prisma.prisma
