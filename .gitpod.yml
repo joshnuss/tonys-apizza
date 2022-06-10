@@ -26,11 +26,11 @@ tasks:
         RED_BOLD='\033[1;31m'
         NC='\033[0m' # No Color
 
-        gp env | grep --quiet STRIPE_PRIVATE_KEY
+        gp env | grep --quiet STRIPE_SECRET_KEY
         if [ $? -eq 1 ]
         then
-          printf "${RED}Missing ${RED_BOLD}STRIPE_PRIVATE_KEY${RED} environment variable.${NC}\n\n"
-          printf "To configure it:\n\n  1. Copy your test key from the Stripe dashboard. See: https://dashboard.stripe.com/test/apikeys\n  2. Inside this terminal, run: ${BOLD}gp env -e STRIPE_PRIVATE_KEY=your_test_stripe_key${NC}\n  3. Stop and re-start your workspace\n"
+          printf "${RED}Missing ${RED_BOLD}STRIPE_SECRET_KEY${RED} environment variable.${NC}\n\n"
+          printf "To configure it:\n\n  1. Copy your test key from the Stripe dashboard. See: https://dashboard.stripe.com/test/apikeys\n  2. Inside this terminal, run: ${BOLD}gp env -e STRIPE_SECRET_KEY=your_test_stripe_key${NC}\n  3. Stop and re-start your workspace\n"
         else
           export HMR_HOST=`gp url 3000`
           pnpm dev

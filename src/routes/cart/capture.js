@@ -1,7 +1,7 @@
 import db from '$lib/db'
 import Stripe from 'stripe'
 
-const stripe = new Stripe(process.env.STRIPE_PRIVATE_KEY)
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
 export async function post() {
   let order = await db.orders.findOrCreate()
